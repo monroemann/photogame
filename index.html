@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Image Guess</title>
+	<style> body {margin: 20px; } 
+
+		.grid-container {
+      		/* grid styles */
+      		  display: grid;
+      		  grid-template-columns: 1fr 1fr 1fr 1fr;
+      		  align-items: center;
+      	}
+
+    	img {
+    		height: 300px;
+    		width: 300px;
+    	}
+    	
+    	.button {
+    		text-align: center;
+    	}
+
+	</style>
+
+	<script>
+		window.onload = init;
+		function init() {
+			var images = document.getElementsByTagName("img");
+			for (var i = 0; i < images.length; i++) {
+				images[i].onclick = toggleAnswer;
+			}
+
+		}
+
+		function toggleAnswer(event) {
+			var image = event.target;
+			console.log(image);
+			var imageName = image.id;
+			console.log(imageName);
+			var fileName = imageName + ".jpg";
+			console.log(fileName);
+			image.src = fileName;
+			console.log(image.src);
+			document.getElementById("prompt").innerHTML = `<h1>It's ${image.name}!</h1>`;
+			document.getElementById("explanation").remove();
+		}
+
+		function resetGame() {
+			window.location.reload();
+		}					
+
+		
+
+	</script>
+</head>
+<body>
+	<div class="grid-container">
+		<div class="photo1"><img id="roe_original" src="roe_blurred.png" name="Monroe Mann"></div>
+		<div class="photo2"><img id="pepsi_original" src="pepsi_blurred.png" name="Pepsi Man From Iraq"></div>
+		<div class="photo3"><img id="triboro_original" src="triboro_blurred.png" name="the Triboro Bridge"></div>
+		<div class="photo4"><img id="timezen_original" src="timezen_blurred.png" name="the Book Time Zen"></div>
+	</div>
+	<div class="button">
+		<h1 id="prompt">Guess Who or What It Is!</h1>
+		<p id="explanation">Click the photo to find out.</p>
+		<button onclick="resetGame()">Reset Game</button>
+	</div>
+</body>
+</html>
